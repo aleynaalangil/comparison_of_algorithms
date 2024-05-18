@@ -1,4 +1,4 @@
-# Sorting Algorithm Performance Report
+# Empirical Analysis of Sorting Algorithms Performance's 
 
 This report analyzes the performance of various sorting algorithms on arrays of different sizes, measuring the execution time in milliseconds (ms). The algorithms evaluated are Bubble Sort, Improved Bubble Sort, Quick Sort, Improved Quick Sort, Merge Sort, and Selection Sort. The sizes of the arrays tested are 10, 100, 1000, 10000, and 100000 elements.
 

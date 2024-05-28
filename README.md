@@ -1,62 +1,64 @@
-# Empirical Analysis of Sorting Algorithm's Performances 
+# Empirical Study
 
 This report analyzes the performance of various sorting algorithms on arrays of different sizes, measuring the execution time in milliseconds (ms). The algorithms evaluated are Bubble Sort, Improved Bubble Sort, Quick Sort, Improved Quick Sort, Merge Sort, and Selection Sort. The sizes of the arrays tested are 10, 100, 1000, 10000, and 100000 elements.
 
 ## Execution Times (in milliseconds)
 
-| Sort Algorithm / Size  | 10       | 100      | 1000     | 10000      | 100000      |
-|------------------------|----------|----------|----------|------------|-------------|
-| Bubble Sort            | 0.001583 | 0.048241 | 4.54735  | 456.891091 | 45876.59328 |
-| Improved Bubble Sort   | 0.002184 | 0.001042 | 0.005124 | 0.049266   | 0.456641    |
-| Quick Sort             | 0.002583 | 0.142599 | 16.71835 | 1336.210667| N/A         |
-| Improved Quick Sort    | 0.0008   | 0.009383 | 0.241192 | 4.116691   | 71.877866   |
-| Merge Sort             | 0.003633 | 0.050916 | 0.625849 | 7.415425   | 85.859133   |
-| Selection Sort         | 0.001274 | 0.027049 | 2.220891 | 217.878183 | 22031.81403 |
+| Sort Algorithm/Size | 10       | 100      | 1000      | 10000       | 100000      |
+|---------------------|----------|----------|-----------|-------------|-------------|
+| Bubble Sort         | 0.001583 | 0.048241 | 4.54735   | 456.891091  | 45876.59328 |
+| Improved Bubble Sort| 0.002184 | 0.001042 | 0.005124  | 0.049266    | 0.456641    |
+| Quick Sort          | 0.002583 | 0.142599 | 16.71835  | 1336.210667 | N/A         |
+| Improved Quick Sort | 0.001358 | 0.144258 | 16.780766 | 1390.252866 | N/A         |
+| Merge Sort          | 0.003633 | 0.050916 | 0.625849  | 7.415425    | 85.859133   |
+| Selection Sort      | 0.001274 | 0.027049 | 2.220891  | 217.878183  | 22031.81403 |
 
-## Analysis
+## Analysis of Data
+
+### Largest Problem Size Within Two Seconds
+
+#### Observations:
+
+- **Bubble Sort**: Takes 4.54735 seconds for 1000 elements, 456.891091 seconds for 10,000 elements, and 45876.59328 seconds for 100,000 elements. It can't handle more than 1000 elements within 2 seconds.
+- **Improved Bubble Sort**: Takes 0.049266 seconds for 10,000 elements and 0.456641 seconds for 100,000 elements. It can handle 100,000 elements within 2 seconds.
+- **Quick Sort**: Takes 16.71835 seconds for 1000 elements, 1336.210667 seconds for 10,000 elements. It can't handle more than 1000 elements within 2 seconds.
+- **Improved Quick Sort**: Takes 16.780766 seconds for 1000 elements and 1390.252866 seconds for 10,000 elements. It can't handle more than 1000 elements within 2 seconds.
+- **Merge Sort**: Takes 7.415425 seconds for 10,000 elements and 85.859133 seconds for 100,000 elements. It can handle 10,000 elements within 2 seconds.
+- **Selection Sort**: Takes 2.220891 seconds for 1000 elements and 217.878183 seconds for 10,000 elements. It can handle 1000 elements within 2 seconds.
+
+## Practical Usage Report
 
 ### Bubble Sort
-- **Performance**: Bubble Sort is the least efficient algorithm among those tested, especially noticeable with larger array sizes. It took approximately 45.88 seconds to sort an array of 100,000 elements.
-- **Practical Usage**: Due to its inefficiency, Bubble Sort is not suitable for large datasets. It may be used for educational purposes or small datasets where simplicity is preferred over performance.
+- **Time Complexity**: O(n²)
+- **Performance**: Highly inefficient for large datasets. From the data, it cannot sort more than 1000 elements in under 2 seconds.
+- **Practical Use**: Limited to very small datasets.
 
 ### Improved Bubble Sort
-- **Performance**: This version of Bubble Sort is significantly faster than the standard Bubble Sort, managing to sort 100,000 elements in about 0.46 milliseconds.
-- **Practical Usage**: Improved Bubble Sort is better than the standard version but still not ideal for very large datasets due to its inherent inefficiencies.
+- **Time Complexity**: O(n²) in the worst case, but can be better on nearly sorted data.
+- **Performance**: More efficient than the basic Bubble Sort. It can handle up to 100,000 elements within 2 seconds based on the data.
+- **Practical Use**: Suitable for small to moderately sized datasets, especially when the data is nearly sorted.
 
 ### Quick Sort
-- **Performance**: Quick Sort is generally efficient, sorting 10,000 elements in about 1.34 seconds. However, it did not perform well on the largest dataset, potentially due to the lack of a median-of-three or similar pivot selection strategy.
-- **Practical Usage**: Quick Sort is highly efficient for most datasets but may degrade in performance on certain inputs without improvements like randomized or median-of-three pivot selection.
+- **Time Complexity**: O(n log n) on average, O(n²) in the worst case.
+- **Performance**: Efficient for large datasets in practice but fails to handle more than 1000 elements within 2 seconds in this specific instance due to potential worst-case behavior.
+- **Practical Use**: Generally good for large datasets but not ideal for highly repetitive or sorted data without modifications.
 
 ### Improved Quick Sort
-- **Performance**: Improved Quick Sort uses Hoare's partitioning scheme and is extremely efficient, sorting 100,000 elements in about 71.88 milliseconds.
-- **Practical Usage**: Improved Quick Sort is highly recommended for large datasets due to its efficiency and speed.
+- **Time Complexity**: O(n log n) on average, with improvements for small datasets.
+- **Performance**: Similar to Quick Sort, limited by worst-case scenarios. Unable to handle more than 1000 elements in under 2 seconds.
+- **Practical Use**: Suitable for large datasets with a safeguard for small arrays, making it more versatile than the standard Quick Sort.
 
 ### Merge Sort
-- **Performance**: Merge Sort performs consistently well, sorting 100,000 elements in about 85.86 milliseconds.
-- **Practical Usage**: Merge Sort is stable and efficient for large datasets. It is particularly useful when stability (preserving the order of equal elements) is required.
+- **Time Complexity**: O(n log n)
+- **Performance**: Consistent and efficient for large datasets. Can handle up to 10,000 elements within 2 seconds.
+- **Practical Use**: Reliable for large datasets due to its stable performance and predictable time complexity.
 
 ### Selection Sort
-- **Performance**: Selection Sort is more efficient than Bubble Sort but still not suitable for very large datasets, taking approximately 22.03 seconds to sort 100,000 elements.
-- **Practical Usage**: Selection Sort is not recommended for large datasets due to its inefficiency but can be used for small datasets or educational purposes.
+- **Time Complexity**: O(n²)
+- **Performance**: Inefficient for large datasets. Can handle only up to 1000 elements within 2 seconds.
+- **Practical Use**: Similar to Bubble Sort, limited to small datasets.
 
-## Practical Limits
+## Conclusion
 
-### What is the biggest problem size you can run in two seconds?
+For practical usage, Merge Sort and Improved Bubble Sort are the most efficient for handling larger datasets within the given 2-second threshold. Merge Sort is particularly reliable for consistently large datasets, while Improved Bubble Sort is more efficient for smaller to moderately sized or nearly sorted datasets. Quick Sort and its improved version have potential but may face limitations in worst-case scenarios. Bubble Sort and Selection Sort are not suitable for large datasets.
 
-Based on the data, the following conclusions can be made about the largest problem sizes that can be sorted within two seconds:
-
-- **Bubble Sort**: Sorting an array of approximately 10,000 elements takes about 456.89 milliseconds, so it can handle around this size within two seconds.
-- **Improved Bubble Sort**: This algorithm can sort far beyond 100,000 elements within two seconds.
-- **Quick Sort**: Sorting 10,000 elements takes about 1.34 seconds, so it can handle slightly more than 10,000 elements within two seconds.
-- **Improved Quick Sort**: Sorting 100,000 elements takes about 71.88 milliseconds, so it can handle well beyond this size within two seconds.
-- **Merge Sort**: Sorting 100,000 elements takes about 85.86 milliseconds, so it can handle well beyond this size within two seconds.
-- **Selection Sort**: Sorting an array of approximately 10,000 elements takes about 217.88 milliseconds, so it can handle around this size within two seconds.
-
-## Verdict on Practical Usage
-
-- **Bubble Sort and Selection Sort** are impractical for large datasets due to their inefficiency.
-- **Improved Bubble Sort** offers better performance but still lags behind more advanced algorithms for large datasets.
-- **Quick Sort** is generally efficient but requires optimization to handle all cases effectively.
-- **Improved Quick Sort** (using Hoare's partitioning scheme) and **Merge Sort** are the best choices for large datasets, offering excellent performance and scalability.
-
-In conclusion, for practical usage, **Improved Quick Sort** and **Merge Sort** are highly recommended for sorting large datasets efficiently. Other algorithms can be used for smaller datasets or specific scenarios where their properties are beneficial.

@@ -1,6 +1,13 @@
+use crate::selection_sort::selection_sort;
+
 pub fn improved_quick_sort(arr: &mut [usize], low: usize, high: usize) -> &mut [usize] {
+    let size = arr.len();
+    if size < 20 {
+        selection_sort(arr, size);
+    };
+
     if low < high {
-        let pi = hoare_partition(arr, low, high);
+        let pi = partition(arr, low, high);
 
         improved_quick_sort(arr, low, pi - 1);
 
@@ -9,29 +16,16 @@ pub fn improved_quick_sort(arr: &mut [usize], low: usize, high: usize) -> &mut [
     arr
 }
 
-fn hoare_partition(arr: &mut [usize], low: usize, high: usize) -> usize {
-    let pivot = arr[low];
+fn partition(arr: &mut [usize], low: usize, high: usize) -> usize {
+    let pivot = arr[high];
     let mut i = low;
-    let mut j = high + 1;
 
-    loop {
-        i += 1;
-        while i <= high && arr[i] < pivot {
+    for j in low..high {
+        if arr[j] <= pivot {
+            arr.swap(i, j);
             i += 1;
         }
-
-        j -= 1;
-        while arr[j] > pivot {
-            j -= 1;
-        }
-
-        if i >= j {
-            break;
-        }
-
-        arr.swap(i, j);
     }
-
-    arr.swap(low, j);
-    j
+    arr.swap(i, high);
+    i
 }
